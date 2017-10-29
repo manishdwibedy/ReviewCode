@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import random
 import string
 import requests
@@ -14,6 +14,15 @@ app_secret = config.ACCOUNTKIT_APP_SECRET
 client_token = config.ACCOUNTKIT_CLIENT_TOKEN
 
 accountkit_version = 'v1.1'
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+@app.route('/stack_login')
+def getStackLogin():
+    # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=RrgzV*kWSo2MOMzBsW4raA))&key=OjpCuT)4u3QHIUrc2O)iQw((&
+    return redirect('/success')
 
 
 @app.route('/')

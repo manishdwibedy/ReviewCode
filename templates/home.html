@@ -6,15 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Account Kit Test</title>
 
+
+<link rel="stylesheet" href={{ url_for('static', filename='css/codemirror.css') }}>
+    <script src={{ url_for('static', filename='js/codemirror.js') }}></script>
+<script>
+  var myCodeMirror = CodeMirror("code", {
+  value: "function myScript(){return 100;}\n",
+  mode:  "javascript"
+});
+</script>
+
+
   </head>
   <body>
-    <h1>Response parameters</h1>
-    <ul>
-      <li> User ID: {{ user_id }}
-      <li> Phone Number: {{ phone_number }}
-      <li> Email Address: {{ email_address }}
-      <li> Access Token: {{ user_access_token }}
-      <li> Refresh Interval: {{ refresh_interval }}
-    </ul>
+
+  <textarea id="code" rows="4" cols="50">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+</textarea>
+
   </body>
 </html>

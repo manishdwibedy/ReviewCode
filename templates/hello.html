@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Account Kit Test</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/codemirror.css') }}>
+    <script src={{ url_for('static', filename='js/codemirror.js') }}></script>
+      <script src={{ url_for('static', filename='js/modes/swift.js') }}></script>
 
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
 
@@ -72,6 +75,23 @@
   <div>
     <b>Message</b>: <span id="message"></span>
   </div>
+
+    <div>
+        <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login&scope=private_info">Add stackoverflow</a>
+    </div>
+
+
+    <textarea id="code1" name="code1">
+
+    </textarea>
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/x-swift"
+      });
+
+</script>
 
 </body>
 </html>
