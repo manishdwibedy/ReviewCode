@@ -24,7 +24,7 @@ def getStackLogin():
     # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=RrgzV*kWSo2MOMzBsW4raA))&key=OjpCuT)4u3QHIUrc2O)iQw((&
     return redirect('/success')
 
-
+# @app.route('')
 @app.route('/')
 def hello_world():
     csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
@@ -34,7 +34,8 @@ def hello_world():
     #                        csrf=csrf_token,
     #                        accountkit_version=accountkit_version)
     # return 'Hello World!'
-    return render_template('hello.html', app_id = app_id, csrf=csrf_token, accountkit_version = accountkit_version)
+    return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
+    # return render_template('hello.html', app_id = app_id, csrf=csrf_token, accountkit_version = accountkit_version)
 
 @app.route('/success', methods=['POST'])
 def success():
