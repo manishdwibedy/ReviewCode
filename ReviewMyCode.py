@@ -28,54 +28,49 @@ def getStackLogin():
 @app.route('/')
 def hello_world():
     csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
-    # bottle.response.set_cookie('csrf', csrf_token, secret=cookie_secret)
-    # return bottle.template('index',
-    #                        app_id=app_id,
-    #                        csrf=csrf_token,
-    #                        accountkit_version=accountkit_version)
-    # return 'Hello World!'
     return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
     # return render_template('hello.html', app_id = app_id, csrf=csrf_token, accountkit_version = accountkit_version)
 
-@app.route('/success', methods=['POST'])
+@app.route('/success', methods=['POST', 'GET'])
 def success():
-    code = request.form['code']
-    csrf = request.form['csrf']
+    if request.method == 'POST':
+        code = request.form['code']
+        csrf = request.form['csrf']
 
-    token_url = 'https://graph.accountkit.com/' + accountkit_version + '/access_token'
-    token_params = {'grant_type': 'authorization_code',
-                    'code': code,
-                    'access_token': 'AA|%s|%s' % (app_id, app_secret)
-                    }
+        token_url = 'https://graph.accountkit.com/' + accountkit_version + '/access_token'
+        token_params = {'grant_type': 'authorization_code',
+                        'code': code,
+                        'access_token': 'AA|%s|%s' % (app_id, app_secret)
+                        }
 
-    r = requests.get(token_url, params=token_params)
-    token_response = r.json()
+        r = requests.get(token_url, params=token_params)
+        token_response = r.json()
 
-    print repr(token_response)
 
-    user_id = token_response.get('id')
-    user_access_token = token_response.get('access_token')
-    refresh_interval = token_response.get('token_refresh_interval_sec')
+        user_id = token_response.get('id')
+        user_access_token = token_response.get('access_token')
+        refresh_interval = token_response.get('token_refresh_interval_sec')
 
-    identity_url = 'https://graph.accountkit.com/' + accountkit_version + '/me'
+        identity_url = 'https://graph.accountkit.com/' + accountkit_version + '/me'
 
-    appsecret_proof = hmac.new(app_secret, user_access_token, hashlib.sha256)
-    # #
-    identity_params = {'access_token': user_access_token,
-                       'appsecret_proof': appsecret_proof.hexdigest()}
+        appsecret_proof = hmac.new(app_secret, user_access_token, hashlib.sha256)
 
-    r = requests.get(identity_url, params=identity_params)
-    identity_response = r.json()
+        identity_params = {'access_token': user_access_token,
+                           'appsecret_proof': appsecret_proof.hexdigest()}
 
-    # print repr(identity_response)
-    #
-    phone_number = identity_response.get('phone', {}).get('number', 'N/A')
-    email_address = identity_response.get('email', {}).get('address', 'N/A')
+        r = requests.get(identity_url, params=identity_params)
+        identity_response = r.json()
 
-    return render_template('home.html', user_id=user_id,
-            phone_number=phone_number,
-            email_address=email_address,
-            user_access_token=user_access_token,
-            refresh_interval=refresh_interval)
+        phone_number = identity_response.get('phone', {}).get('number', 'N/A')
+        email_address = identity_response.get('email', {}).get('address', 'N/A')
+
+        return render_template('home.html', user_id=user_id,
+                phone_number=phone_number,
+                email_address=email_address,
+                user_access_token=user_access_token,
+                refresh_interval=refresh_interval)
+    else:
+        return render_template('home.html')
+
 if __name__ == '__main__':
     app.run()
