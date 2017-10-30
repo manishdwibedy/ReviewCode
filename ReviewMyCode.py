@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, url_for
 import random
 import string
 import requests
@@ -83,11 +83,14 @@ def success():
         if user_id and len(user_id) > 0:
             return render_template('home.html')
         else:
-            return redirect('/')
+            # return redirect('/')
+            return redirect(url_for('/'))
+            # csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+            # return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
 
 @app.route('/logout')
 def logout():
-    resp = make_response(render_template('index.html'))
+    resp = make_response(redirect(''))
     resp.set_cookie('user_id', expires=0)
     resp.set_cookie('phone_number', expires=0)
     resp.set_cookie('email_address', expires=0)
