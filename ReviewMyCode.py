@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 import random
 import string
 import requests
@@ -64,13 +64,39 @@ def success():
         phone_number = identity_response.get('phone', {}).get('number', 'N/A')
         email_address = identity_response.get('email', {}).get('address', 'N/A')
 
-        return render_template('home.html', user_id=user_id,
-                phone_number=phone_number,
-                email_address=email_address,
-                user_access_token=user_access_token,
-                refresh_interval=refresh_interval)
+        resp = make_response(render_template('home.html'))
+        resp.set_cookie('user_id', user_id)
+        resp.set_cookie('phone_number', phone_number)
+        resp.set_cookie('email_address', email_address)
+        resp.set_cookie('user_access_token', user_access_token)
+        # resp.set_cookie('refresh_interval', refresh_interval)
+
+        return resp
+        # return render_template('home.html', user_id=user_id,
+        #         phone_number=phone_number,
+        #         email_address=email_address,
+        #         user_access_token=user_access_token,
+        #         refresh_interval=refresh_interval)
     else:
-        return render_template('home.html')
+        user_id = request.cookies.get('user_id')
+
+        if user_id and len(user_id) > 0:
+            return render_template('home.html')
+        else:
+            return redirect('/')
+
+@app.route('/logout')
+def logout():
+    resp = make_response(render_template('index.html'))
+    resp.set_cookie('user_id', expires=0)
+    resp.set_cookie('phone_number', expires=0)
+    resp.set_cookie('email_address', expires=0)
+    resp.set_cookie('user_access_token', expires=0)
+
+    return resp
+
+
+
 
 if __name__ == '__main__':
     app.run()
