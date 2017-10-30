@@ -29,6 +29,12 @@
             <p class="animated fadeIn text-muted">
                 <button type="button" class="btn btn-primary" onclick="smsLogin();">Login using your phone number</button>
             </p>
+
+              <form id="login_success" method="post" action="/success">
+                <input id="csrf" type="hidden" name="csrf" />
+                <input id="code" type="hidden" name="code" />
+              </form>
+
         </div>
     </div>
     <!-- /Start your project here-->
@@ -46,21 +52,20 @@
 
     <!-- Account Kit Login -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
-<script>
+    <script>
 
-    // initialize Account Kit with CSRF protection
-AccountKit_OnInteractive = function(){
-AccountKit.init(
-  {
-    appId:"{{ app_id }}",
-    state:"{{ csrf }}",
-    version:"{{ accountkit_version }}",
-{#          debug:true,#}
-    fbAppEventsEnabled:true
-  }
-);
-};
-</script>
+        // initialize Account Kit with CSRF protection
+    AccountKit_OnInteractive = function(){
+    AccountKit.init(
+      {
+        appId:"{{ app_id }}",
+        state:"{{ csrf }}",
+        version:"{{ accountkit_version }}",
+        fbAppEventsEnabled:true
+      }
+    );
+    };
+    </script>
 </body>
 
 </html>
