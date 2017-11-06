@@ -78,6 +78,9 @@
     </nav>
     <!--/.Navbar-->
     <div>
+        <button type="button" class="btn btn-primary" id="stackLogin">Add your StackOverflow account</button>
+
+
         <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login&scope=private_info">Add stackoverflow</a>
     </div>
 
@@ -99,6 +102,8 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/home.js') }}"></script>
 
 
 </body>

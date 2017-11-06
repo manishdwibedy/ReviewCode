@@ -22,7 +22,7 @@ def test():
 @app.route('/stack_login')
 def getStackLogin():
     # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=RrgzV*kWSo2MOMzBsW4raA))&key=OjpCuT)4u3QHIUrc2O)iQw((&
-    return redirect('/success')
+    return redirect('/home')
 
 # @app.route('')
 @app.route('/')
@@ -64,7 +64,7 @@ def success():
         phone_number = identity_response.get('phone', {}).get('number', 'N/A')
         email_address = identity_response.get('email', {}).get('address', 'N/A')
 
-        resp = make_response(render_template('home.html'))
+        resp = make_response(redirect('/home'))
         resp.set_cookie('user_id', user_id)
         resp.set_cookie('phone_number', phone_number)
         resp.set_cookie('email_address', email_address)
@@ -81,9 +81,16 @@ def success():
         user_id = request.cookies.get('user_id')
 
         if user_id and len(user_id) > 0:
-            return render_template('home.html')
+            return redirect('/home')
         else:
             return redirect('/')
+
+@app.route('/home')
+def home():
+    if request.args.get("access_token", None) is not None:
+        redirect(request.path)
+    else:
+        return render_template('home.html')
 
 @app.route('/logout')
 def logout():
