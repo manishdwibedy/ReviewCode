@@ -14,66 +14,79 @@
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href={{ url_for('static', filename='css/mdb.min.css') }}>
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/codemirror.css') }}>
+    <script src={{ url_for('static', filename='js/codemirror.js') }}></script>
+    <script src={{ url_for('static', filename='js/modes/swift.js') }}></script>
 
 </head>
 
 <body>
 
     <!-- Start your project here-->
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo">
 
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#">Navbar</a>
 
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
 
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
 
-        </ul>
-        <!-- Links -->
+            </ul>
+            <!-- Links -->
 
-        <!-- Search form -->
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="img-fluid rounded-circle z-depth-0"                   style="width: 40px;">
-        &nbsp;
-        <a href="/logout">
-            <i class="fa fa-sign-out fa-3x" aria-hidden="true" style="color:white"></i>
-        </a>
+            <!-- Search form -->
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="img-fluid rounded-circle z-depth-0"                   style="width: 40px;">
+            &nbsp;
+            <a href="/logout">
+                <i class="fa fa-sign-out fa-3x" aria-hidden="true" style="color:white"></i>
+            </a>
 
 
+        </div>
+        <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+    <div>
+        <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login&scope=private_info">Add stackoverflow</a>
     </div>
-    <!-- Collapsible content -->
 
-</nav>
-<!--/.Navbar-->
+
+    <textarea id="code1" name="code1">
+
+    </textarea>
+
+
     <!-- /Start your project here-->
 
     <!-- SCRIPTS -->
@@ -86,6 +99,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+
 
 </body>
 

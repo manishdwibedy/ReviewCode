@@ -83,10 +83,7 @@ def success():
         if user_id and len(user_id) > 0:
             return render_template('home.html')
         else:
-            # return redirect('/')
-            return redirect(url_for('/'))
-            # csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
-            # return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
+            return redirect('/')
 
 @app.route('/logout')
 def logout():
