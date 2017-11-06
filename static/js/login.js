@@ -17,8 +17,8 @@ function loginCallback(response) {
 }
 // phone form submission handler
 function smsLogin() {
-    var countryCode = document.getElementById("country_code").value;
-    var phoneNumber = document.getElementById("phone_number").value;
+    // var countryCode = '+1'
+    // var phoneNumber = document.getElementById("phone_number").value;
     AccountKit.login(
       'PHONE',
       {countryCode: '+1', phoneNumber: ''}, // will use default values if not specified
@@ -27,10 +27,10 @@ function smsLogin() {
 }
 // email form submission handler
 function emailLogin() {
-// var emailAddress = document.getElementById("email").value;
-AccountKit.login(
-  'EMAIL',
-  {emailAddress: ''},
-  loginCallback
-);
+    // var emailAddress = document.getElementById("email").value;
+    AccountKit.login(
+      'EMAIL',
+      {emailAddress: ''},
+      loginCallback
+    );
 }

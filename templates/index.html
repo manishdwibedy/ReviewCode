@@ -13,7 +13,7 @@
 
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href={{ url_for('static', filename='css/mdb.min.css') }}>
-    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
 
 </head>
 
@@ -28,6 +28,7 @@
 
             <p class="animated fadeIn text-muted">
                 <button type="button" class="btn btn-primary" onclick="smsLogin();">Login using your phone number</button>
+                <button type="button" class="btn btn-primary" onclick="emailLogin();">Login using your email</button>
             </p>
 
               <form id="login_success" method="post" action="/success">
@@ -51,21 +52,23 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
 
     <!-- Account Kit Login -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+
     <script>
 
         // initialize Account Kit with CSRF protection
-    AccountKit_OnInteractive = function(){
-    AccountKit.init(
-      {
-        appId:"{{ app_id }}",
-        state:"{{ csrf }}",
-        version:"{{ accountkit_version }}",
-        fbAppEventsEnabled:true
-      }
-    );
-    };
+        AccountKit_OnInteractive = function(){
+        AccountKit.init(
+          {
+            appId:"{{ app_id }}",
+            state:"{{ csrf }}",
+            version:"{{ accountkit_version }}",
+            fbAppEventsEnabled:true
+          }
+        );
+        };
     </script>
+    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 
 </html>
