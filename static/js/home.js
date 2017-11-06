@@ -11,3 +11,14 @@ $("#stackLogin").click(function(e) {
         }
     });
 });
+
+
+var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+    lineNumbers: true,
+    matchBrackets: true,
+    mode: $("#lang").val()
+});
+
+function switchLanguage() {
+    this.editor.setOption("mode", $("#lang").val());
+}
