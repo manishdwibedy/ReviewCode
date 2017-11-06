@@ -15,6 +15,7 @@ client_token = config.ACCOUNTKIT_CLIENT_TOKEN
 
 accountkit_version = 'v1.1'
 
+
 @app.route('/test')
 def test():
     return render_template('test.html')
@@ -22,7 +23,10 @@ def test():
 @app.route('/stack_login')
 def getStackLogin():
     # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=RrgzV*kWSo2MOMzBsW4raA))&key=OjpCuT)4u3QHIUrc2O)iQw((&
-    return redirect('/home')
+
+    # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=SqgClNdfdfVLsm8lIp3edw))&key=OjpCuT)4u3QHIUrc2O)iQw((&
+    resp = make_response(redirect('/home'))
+    return resp
 
 # @app.route('')
 @app.route('/')
@@ -87,6 +91,8 @@ def success():
 
 @app.route('/home')
 def home():
+    user_id = request.cookies.get('user_id')
+    print(user_id)
     if request.args.get("access_token", None) is not None:
         redirect(request.path)
     else:
