@@ -1,4 +1,19 @@
 
+// Initialize Firebase
+var config = {
+apiKey: "AIzaSyAoskz4tPPIuZXRXkZxvzsQ59xbHssTHv0",
+authDomain: "review-code-38d2b.firebaseapp.com",
+databaseURL: "https://review-code-38d2b.firebaseio.com",
+projectId: "review-code-38d2b",
+storageBucket: "",
+messagingSenderId: "585561892876"
+};
+firebase.initializeApp(config);
+
+// Initialize Cloud Firestore through Firebase
+var db = firebase.firestore();
+
+
 var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
     lineNumbers: true,
     matchBrackets: true,
@@ -29,6 +44,25 @@ function switchLanguage() {
     this.editor.setOption("mode", $("#lang").val());
 }
 
+getCode();
+
+function getCode() {
+    db.collection("code").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} =>`);
+            console.log(doc.data());
+            const data = doc.data();
+            var html = '';
+            html += "<div id='code'>";
+
+            const title = data.title.length > 0 ? data.title : "No title provided";
+            html += "<p>" + title + "</p>";
+            html += "</div>"
+            $( "div#codeHolder" ).append( html );
+
+        });
+    });
+}
 
 function addData(){
     db.collection("code").add({
@@ -51,17 +85,4 @@ function addData(){
     });
 }
 
-// Initialize Firebase
-var config = {
-apiKey: "AIzaSyAoskz4tPPIuZXRXkZxvzsQ59xbHssTHv0",
-authDomain: "review-code-38d2b.firebaseapp.com",
-databaseURL: "https://review-code-38d2b.firebaseio.com",
-projectId: "review-code-38d2b",
-storageBucket: "",
-messagingSenderId: "585561892876"
-};
-firebase.initializeApp(config);
-
-// Initialize Cloud Firestore through Firebase
-var db = firebase.firestore();
 
