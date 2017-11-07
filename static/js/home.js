@@ -53,11 +53,16 @@ function getCode() {
             console.log(doc.data());
             const data = doc.data();
             var html = '';
-            html += "<div id='code'>";
+            html += "<div class='question'>";
+            html += "<div class='stats'>" +
+                "<div class='answered'>1</div>" +
+                "<div class='answers'>2</div>" +
+                "</div>";
 
-            const title = data.title.length > 0 ? data.title : "No title provided";
-            html += "<p>" + title + "</p>";
-            html += "</div>"
+            const title = data.title && data.title.length > 0 ? data.title : "No title provided";
+            html += "<div id='class'><p>" + title + "</p></div>";
+
+            html += "</div>";
             $( "div#codeHolder" ).append( html );
 
         });
