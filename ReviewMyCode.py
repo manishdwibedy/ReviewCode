@@ -5,9 +5,26 @@ import requests
 import hmac
 import hashlib
 import config
+import DB
+import user
+
 app = Flask(__name__)
 
 
+import pyrebase
+
+config_firebase = {
+  "apiKey": "AIzaSyAoskz4tPPIuZXRXkZxvzsQ59xbHssTHv0",
+  "authDomain": "review-code-38d2b.firebaseapp.com",
+  "databaseURL": "https://review-code-38d2b.firebaseio.com",
+  "storageBucket": "",
+  # "serviceAccount": "./secret.json"
+}
+
+
+firebase = pyrebase.initialize_app(config_firebase)
+
+# https://review-code-38d2b.firebaseio.com/code?auth=7E1hzaOHPNC8DenDj39n7GMsahQX7uiDG45oRimN
 # app.config.from_pyfile('config.cfg')
 app_id = config.ACCOUNTKIT_APP_ID
 app_secret = config.ACCOUNTKIT_APP_SECRET
@@ -98,6 +115,21 @@ def home():
     else:
         return render_template('home.html')
 
+@app.route('/codes/<code_id>')
+def code(code_id):
+    db = firebase.database()
+
+    if request.args.get("access_token", None) is not None:
+        redirect('/')
+    else:
+        code = 'asdadsasdasdad\nasdasdasdasd\nasdsadadas'
+
+        try:
+            code = db.child("code").child(code_id).get()
+        except:
+            print 'Error occurred'
+        return render_template('codes.html', code=code)
+
 @app.route('/logout')
 def logout():
     resp = make_response(redirect(''))
@@ -112,4 +144,7 @@ def logout():
 
 
 if __name__ == '__main__':
+    db = DB.DB()
+    db.addUser(user.User())
+    db.getUsers()
     app.run()

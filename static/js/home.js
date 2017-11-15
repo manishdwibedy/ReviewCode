@@ -44,6 +44,12 @@ function switchLanguage() {
     this.editor.setOption("mode", $("#lang").val());
 }
 
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+
+});
+
 getCode();
 
 function getCode() {
@@ -60,12 +66,19 @@ function getCode() {
                 "</div>";
 
             const title = data.title && data.title.length > 0 ? data.title : "No title provided";
-            html += "<div id='class'><p>" + title + "</p></div>";
+            html += "<div class='summary' id=" + doc.id + "><p>" + title + "</p></div>";
 
             html += "</div>";
             $( "div#codeHolder" ).append( html );
 
         });
+
+        $(".summary").click(function() {
+              //alert('ashutosh mishra');
+              var win = window.open('/codes/' + this.id, '_blank');
+              win.focus();
+
+         });
     });
 }
 

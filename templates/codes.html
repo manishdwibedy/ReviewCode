@@ -45,6 +45,10 @@
             width: 530px;
             padding: 0;
         }
+
+        textarea#code1{
+            height: 300px;
+        }
     </style>
 </head>
 
@@ -108,14 +112,10 @@
     <div>
         <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login?&scope=private_info">Add stackoverflow</a>
 
-        <select id="lang" onchange="switchLanguage()">
-          <option value="text/x-swift">Swift</option>
-          <option value="javascript">Javascript</option>
-        </select>
     </div>
 
 
-    <textarea id="code1" name="code1"></textarea>
+    <textarea id="code1" name="code1">{{ code }}</textarea>
 
     <div id="codeHolder">
 
@@ -140,7 +140,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 
-    <script type="text/javascript" src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/code.js') }}"></script>
 
 
 
