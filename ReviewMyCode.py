@@ -8,7 +8,7 @@ from flask import Flask, render_template, request, redirect, make_response
 
 import DB
 import config
-from model import user
+from model import user, question, review
 
 app = Flask(__name__)
 
@@ -147,6 +147,13 @@ def logout():
 
 if __name__ == '__main__':
     db = DB.DB()
-    db.addUser(user.User())
-    db.getUsers()
+    # db.addUser(user.User())
+    # db.getUsers()
+
+    # resp = db.addQuestion(question.Question())
+    # db.getQuestions()
+
+    db.addReview(review.Review())
+    db.getReviews()
+
     app.run()
