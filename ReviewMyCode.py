@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request, redirect, make_response, url_for
+import hashlib
+import hmac
 import random
 import string
+
 import requests
-import hmac
-import hashlib
-import config
+from flask import Flask, render_template, request, redirect, make_response
+
 import DB
-import user
+import config
+from model import user
 
 app = Flask(__name__)
 
