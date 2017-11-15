@@ -1,4 +1,6 @@
 from pymongo import MongoClient
+from bson import ObjectId
+
 import json
 import ast
 
@@ -28,6 +30,13 @@ class DB(object):
     def getQuestions(self):
         questions = list(self.db.questions.find())
         return questions
+
+    def getQuestion(self, id):
+        question = list(self.db.questions.find({
+            "_id": ObjectId(id)
+            # "author_username" : "Sample User"
+        }))
+        return question
 
     def addReview(self, review):
         json1 = json.dumps(review, default=lambda o: o.__dict__)

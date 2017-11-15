@@ -117,20 +117,17 @@ def home():
     else:
         return render_template('home.html')
 
-@app.route('/codes/<code_id>')
-def code(code_id):
-    db = firebase.database()
-
+@app.route('/codes/<question_id>')
+def code(question_id):
     if request.args.get("access_token", None) is not None:
         redirect('/')
     else:
-        code = 'asdadsasdasdad\nasdasdasdasd\nasdsadadas'
+        question = db.getQuestion(question_id)
 
-        try:
-            code = db.child("code").child(code_id).get()
-        except:
-            print 'Error occurred'
-        return render_template('codes.html', code=code)
+        if len(question) == 1:
+            return render_template('codes.html', question=question[0])
+        else:
+            return render_template('codes.html', question=None)
 
 @app.route('/logout')
 def logout():
@@ -153,7 +150,7 @@ if __name__ == '__main__':
     # resp = db.addQuestion(question.Question())
     # db.getQuestions()
 
-    db.addReview(review.Review())
-    db.getReviews()
+    # db.addReview(review.Review())
+    # db.getReviews()
 
     app.run()
