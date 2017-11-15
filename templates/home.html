@@ -13,10 +13,12 @@
 
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href={{ url_for('static', filename='css/mdb.min.css') }}>
+
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <link rel="stylesheet" href={{ url_for('static', filename='css/codemirror.css') }}>
     <script src={{ url_for('static', filename='js/codemirror.js') }}></script>
     <script src={{ url_for('static', filename='js/modes/swift.js') }}></script>
+    <script src="https://use.fontawesome.com/bd5372d942.js"></script>
 
     <style>
         div#codeHolder{
@@ -44,6 +46,14 @@
         .summary{
             width: 530px;
             padding: 0;
+        }
+
+        .container{
+            width: 100%;
+        }
+
+        .question-details{
+            padding-left: 0px;
         }
     </style>
 </head>
@@ -117,7 +127,44 @@
 
     <textarea id="code1" name="code1"></textarea>
 
+
+
+    <div class="container">
+        {% for question in questions %}
+            <div class="row">
+                <div class="col col-lg-1">
+                    <i class="fa fa-thumbs-up" aria-hidden="true" style="vertical-align: -webkit-baseline-middle;"></i>
+                    <span class="badge badge-default"  style="vertical-align: -webkit-baseline-middle;">10</span>
+                </div>
+                <div class="col col-lg-1">
+                    <i class="fa fa-reply" aria-hidden="true" style="vertical-align: -webkit-baseline-middle;"></i>
+                    <span class="badge badge-default" style="vertical-align: -webkit-baseline-middle;">100</span>
+                </div>
+                <div class="col col-lg-10">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-lg-12 summary" id="{{ question._id }}">
+                               {% if question.question_title|length == 0 %}
+                                    No title provided
+                                {% else %}
+                                    {{ question.question_title }}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-lg-12 question-details">
+                                Asked by {{ question.author_username }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
     <div id="codeHolder">
+
 
     </div>
     <button type="button" class="btn btn-primary" id="submit-code">Submit Code for Review</button>

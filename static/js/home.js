@@ -50,7 +50,7 @@ $( document ).ready(function() {
 
 });
 
-getCode();
+//getCode();
 
 function getCode() {
     db.collection("code").get().then((querySnapshot) => {
@@ -73,14 +73,16 @@ function getCode() {
 
         });
 
-        $(".summary").click(function() {
+
+    });
+}
+
+$(".summary").click(function() {
               //alert('ashutosh mishra');
               var win = window.open('/codes/' + this.id, '_blank');
               win.focus();
 
          });
-    });
-}
 
 function addData(){
     db.collection("code").add({

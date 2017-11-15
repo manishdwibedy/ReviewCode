@@ -115,7 +115,8 @@ def home():
     if request.args.get("access_token", None) is not None:
         redirect(request.path)
     else:
-        return render_template('home.html')
+        questions = db.getQuestions()
+        return render_template('home.html', questions = questions)
 
 @app.route('/codes/<question_id>')
 def code(question_id):
