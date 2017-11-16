@@ -19,33 +19,14 @@
     <script src={{ url_for('static', filename='js/modes/swift.js') }}></script>
 
     <style>
-        div#codeHolder{
-            width: 100%;
-            height: 1000px;
-        }
 
-        .question{
-            height: 50px;
+        div#review{
+            margin-left: 20px;
         }
-
-        .stats{
-            vertical-align: top;
-            float: left;
-            margin-right: 30px;
+        textarea#user-review{
+            height: 150px;
+            width: 90%;
         }
-
-        .answers, .answered{
-            float: left;
-            width: 30px;
-            padding: 10px 30px;
-            line-height: 1;
-        }
-
-        .summary{
-            width: 530px;
-            padding: 0;
-        }
-
         textarea#code1{
             height: 300px;
         }
@@ -121,10 +102,16 @@
 
     <br />
     Asked <span> {{ question.time }}</span>
-    <div id="codeHolder">
+
+    <br />
+    <br />
+    <div id="review">
+        Can you provide review for the code? <br />
+        <textarea id="user-review"></textarea>
+        <button type="button" class="btn btn-primary" id="submit-code">Submit Review</button>
+
 
     </div>
-    <button type="button" class="btn btn-primary" id="submit-code">Submit Code for Review</button>
 
     <!-- /Start your project here-->
 
