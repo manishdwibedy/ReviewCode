@@ -15,7 +15,7 @@ from model import user, question, review
 
 app = Flask(__name__)
 
-
+db = DB.DB()
 import pyrebase
 
 config_firebase = {
@@ -170,7 +170,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    db = DB.DB()
     # db.addUser(user.User())
     # db.getUsers()
 
