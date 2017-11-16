@@ -152,11 +152,27 @@ def ask():
         return jsonify(
             acknowledged=response.acknowledged,
         )
-        # return jsonify(
-        #     acknowledged=True,
-        # )
     else:
         return render_template('ask_question.html')
+
+@app.route('/submit-review', methods=['POST', 'GET'])
+def submitReview():
+    if request.method == 'POST' or True:
+        review_text = "test"#request.form['review']
+        question_id = "5a0cfa9522cfdeb6863e58e6" #request.form['question-id']
+
+        question_review = review.Review()
+        question_review.question_id = question_id
+        question_review.user_id = request.cookies.get('user_id')
+        question_review.review_text = review_text
+
+        response = db.addReview(question_id, question_review)
+
+        return jsonify(
+            acknowledged=response.acknowledged,
+        )
+    else:
+        return ''
 
 @app.route('/logout')
 def logout():

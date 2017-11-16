@@ -8,5 +8,6 @@ class Question(object):
         self.language_mode = ""
         self.question_title = ""
         self.question_code = ""
+        self.reviews = []
         self.timestamp = time.time()
         self.time = ""

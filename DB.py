@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument
 from bson import ObjectId
 import json
 import ast
@@ -47,11 +47,16 @@ class DB(object):
         return question
 
     def addReview(self, review):
-        json1 = json.dumps(review, default=lambda o: o.__dict__)
-        response = self.reviews.insert_one(ast.literal_eval(json1))
+
+        json_string = json.dumps(review, default=lambda o: o.__dict__)
+        json_dict = ast.literal_eval(json_string)
+        response = self.reviews.insert_one(json_dict)
+
         return response
 
-    def getReviews(self):
-        reviews = list(self.db.reviews.find())
+    def getReviews(self, question_id):
+        reviews = list(self.db.reviews.find({
+            'question_id': question_id
+        }))
         return reviews
 
