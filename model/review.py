@@ -6,3 +6,4 @@ class Review(object):
         self.user_id = "user_id"
         self.review_text = ""
         self.timestamp = time.time()
+        self.time = ''

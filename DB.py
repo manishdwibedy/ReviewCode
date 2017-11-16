@@ -58,5 +58,9 @@ class DB(object):
         reviews = list(self.db.reviews.find({
             'question_id': question_id
         }))
+        for review in reviews:
+            date = arrow.get(review['timestamp'])
+            review['time'] = date.humanize()
+
         return reviews
 

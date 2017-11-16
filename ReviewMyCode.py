@@ -130,9 +130,12 @@ def code(question_id):
         redirect('/')
     else:
         question = db.getQuestion(question_id)
+        reviews = db.getReviews(question_id)
 
+        for review in reviews:
+            review['review_text'] = review['review_text'].replace('\n', '<br />')
         if len(question) == 1:
-            return render_template('codes.html', question=question[0])
+            return render_template('codes.html', question=question[0], reviews=reviews, question_id=question_id)
         else:
             return render_template('codes.html', question=None)
 
@@ -158,15 +161,15 @@ def ask():
 @app.route('/submit-review', methods=['POST', 'GET'])
 def submitReview():
     if request.method == 'POST' or True:
-        review_text = "test"#request.form['review']
-        question_id = "5a0cfa9522cfdeb6863e58e6" #request.form['question-id']
+        review_text = request.form['review']
+        question_id = request.form['question-id']
 
         question_review = review.Review()
         question_review.question_id = question_id
         question_review.user_id = request.cookies.get('user_id')
         question_review.review_text = review_text
 
-        response = db.addReview(question_id, question_review)
+        response = db.addReview(question_review)
 
         return jsonify(
             acknowledged=response.acknowledged,

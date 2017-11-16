@@ -23,12 +23,28 @@
         div#review{
             margin-left: 20px;
         }
+
+        div.review{
+            border-radius: 15px 15px 15px 15px;
+            -moz-border-radius: 15px 15px 15px 15px;
+            -webkit-border-radius: 15px 15px 15px 15px;
+            border: 0px solid #000000;
+            background: #f3dc98;
+            margin: 10px 0px;
+        }
+
         textarea#user-review{
             height: 150px;
             width: 90%;
         }
+
         textarea#code1{
             height: 300px;
+        }
+
+        span.review-time{
+            font-size: smaller;
+            float: right;
         }
     </style>
 </head>
@@ -95,20 +111,55 @@
 
     </div>
 
+    <div class="alert alert-dismissible fade show" role="alert" style="display: none">
+        <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong id="alert-header">Holy guacamole!</strong>
+        <p id="alert-body"></p>
+
+    </div>
 
     <textarea id="code1" name="code1" readonly>{{ question.question_code }}</textarea>
+    <input type="hidden" id="question-id" value="{{ question_id }}"/>
     <br />
     Asked by <span> {{ question.author_username }}</span>
 
     <br />
     Asked <span> {{ question.time }}</span>
 
+    <br/> <br/>
+    <div>
+        {% if reviews|length == 0 %}
+                No reviews yet!! Become the first to help...
+        {%  else %}
+            Reviews
+        {% endif %}
+    </div>
+    <br/> <br/>
+    <div class="container">
+
+
+        {% for review in reviews %}
+            <div class="row review">
+                <div class="col col-lg-12">
+                    <span class=".review-text">
+                        {{ review.review_text|safe }}
+                    </span>
+                    <br />
+                    <span class="review-time">
+                        Answered {{ review.time }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <br />
     <br />
     <div id="review">
         Can you provide review for the code? <br />
         <textarea id="user-review"></textarea>
-        <button type="button" class="btn btn-primary" id="submit-code">Submit Review</button>
+        <button type="button" class="btn btn-primary" id="submit-review">Submit Review</button>
 
 
     </div>
