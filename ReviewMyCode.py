@@ -7,7 +7,10 @@ import requests
 from flask import Flask, render_template, request, redirect, make_response, jsonify
 
 import DB
-import config
+# from config import
+ACCOUNTKIT_APP_ID='183987662160596'
+ACCOUNTKIT_APP_SECRET='95c6ef9a92d2843b8223b6f32d2dac3c'
+ACCOUNTKIT_CLIENT_TOKEN='d06a9c41bf33fb45822b518b8c0b0b08'
 from model import user, question, review
 
 app = Flask(__name__)
