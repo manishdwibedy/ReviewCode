@@ -50,9 +50,12 @@ def getStackLogin():
 # @app.route('')
 @app.route('/')
 def hello_world():
-    csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
-    return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
-    # return render_template('hello.html', app_id = app_id, csrf=csrf_token, accountkit_version = accountkit_version)
+    user_id = request.cookies.get('user_id')
+    if user_id:
+        return redirect('/home')
+    else:
+        csrf_token = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+        return render_template('index.html', app_id=app_id, csrf=csrf_token, accountkit_version=accountkit_version)
 
 @app.route('/success', methods=['POST', 'GET'])
 def success():
@@ -129,6 +132,10 @@ def code(question_id):
             return render_template('codes.html', question=question[0])
         else:
             return render_template('codes.html', question=None)
+
+@app.route('/ask')
+def ask():
+    return render_template('ask_question.html')
 
 @app.route('/logout')
 def logout():
