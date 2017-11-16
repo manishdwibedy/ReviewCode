@@ -31,9 +31,9 @@ firebase = pyrebase.initialize_app(config_firebase)
 
 # https://review-code-38d2b.firebaseio.com/code?auth=7E1hzaOHPNC8DenDj39n7GMsahQX7uiDG45oRimN
 # app.config.from_pyfile('config.cfg')
-app_id = config.ACCOUNTKIT_APP_ID
-app_secret = config.ACCOUNTKIT_APP_SECRET
-client_token = config.ACCOUNTKIT_CLIENT_TOKEN
+app_id = ACCOUNTKIT_APP_ID
+app_secret = ACCOUNTKIT_APP_SECRET
+client_token = ACCOUNTKIT_CLIENT_TOKEN
 
 accountkit_version = 'v1.1'
 
