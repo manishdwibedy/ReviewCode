@@ -22,7 +22,7 @@ $( document ).ready(function() {
 
 $(".summary").click(function() {
               //alert('ashutosh mishra');
-              var win = window.open('/codes/' + this.id, '_blank');
+              var win = window.open('/codes/' + this.id,"_self");
               win.focus();
 
          });
