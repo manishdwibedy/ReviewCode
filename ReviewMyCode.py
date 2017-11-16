@@ -82,10 +82,11 @@ def success():
 
         identity_url = 'https://graph.accountkit.com/' + accountkit_version + '/me'
 
-        appsecret_proof = hmac.new(app_secret, user_access_token, hashlib.sha256)
+        # appsecret_proof = hmac.new(app_secret, user_access_token, hashlib.sha256)
 
         identity_params = {'access_token': user_access_token,
-                           'appsecret_proof': appsecret_proof.hexdigest()}
+                           # 'appsecret_proof': appsecret_proof.hexdigest()
+                           }
 
         r = requests.get(identity_url, params=identity_params)
         identity_response = r.json()
