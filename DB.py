@@ -41,6 +41,9 @@ class DB(object):
             "_id": ObjectId(id)
             # "author_username" : "Sample User"
         }))
+
+        date = arrow.get(question[0]['timestamp'])
+        question[0]['time'] = date.humanize()
         return question
 
     def addReview(self, review):

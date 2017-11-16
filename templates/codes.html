@@ -115,8 +115,12 @@
     </div>
 
 
-    <textarea id="code1" name="code1">{{ question.question_code }}</textarea>
+    <textarea id="code1" name="code1" readonly>{{ question.question_code }}</textarea>
+    <br />
+    Asked by <span> {{ question.author_username }}</span>
 
+    <br />
+    Asked <span> {{ question.time }}</span>
     <div id="codeHolder">
 
     </div>
