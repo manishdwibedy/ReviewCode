@@ -9,3 +9,4 @@ class Question(object):
         self.question_title = ""
         self.question_code = ""
         self.timestamp = time.time()
+        self.time = ""

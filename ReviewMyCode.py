@@ -2,7 +2,6 @@ import hashlib
 import hmac
 import random
 import string
-
 import requests
 from flask import Flask, render_template, request, redirect, make_response, jsonify
 
@@ -147,7 +146,8 @@ def ask():
         question_asked.language = 'javascript'
         question_asked.question_code = code
         question_asked.question_title = title
-
+        question_asked.author_id = request.cookies.get('user_id')
+        question_asked.author_username = request.cookies.get('')
         response = db.addQuestion(question_asked)
         return jsonify(
             acknowledged=response.acknowledged,

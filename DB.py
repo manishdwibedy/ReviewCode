@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 from bson import ObjectId
-
 import json
 import ast
+import arrow
 
 class DB(object):
 
@@ -30,6 +30,10 @@ class DB(object):
 
     def getQuestions(self):
         questions = list(self.db.questions.find())
+
+        for question in questions:
+            date = arrow.get(question['timestamp'])
+            question['time'] = date.humanize()
         return questions
 
     def getQuestion(self, id):
