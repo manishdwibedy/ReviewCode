@@ -24,14 +24,15 @@ $("#stackLogin").click(function(e) {
 
 $("#submit-code").click(function(e) {
 
-    var text = $('#code1')[0].value;
-
+    var code = $('#code1')[0].value;
+    var title = $('#question-title-input')[0].value;
     if (!submitted){
         $.ajax({
             type: "POST",
             url: '/ask',
             data: {
-                'code': text
+                'code': code,
+                'title': title
             },
             success: success,
         });

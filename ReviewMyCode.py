@@ -141,18 +141,20 @@ def code(question_id):
 def ask():
     if request.method == 'POST':
         code = request.form['code']
+        title = request.form['title']
 
         question_asked = question.Question()
         question_asked.language = 'javascript'
         question_asked.question_code = code
+        question_asked.question_title = title
 
-        # response = db.addQuestion(question_asked)
-        # return jsonify(
-        #     acknowledged=response.acknowledged,
-        # )
+        response = db.addQuestion(question_asked)
         return jsonify(
-            acknowledged=True,
+            acknowledged=response.acknowledged,
         )
+        # return jsonify(
+        #     acknowledged=True,
+        # )
     else:
         return render_template('ask_question.html')
 
