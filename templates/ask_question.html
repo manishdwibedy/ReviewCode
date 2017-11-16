@@ -114,10 +114,25 @@
 
     </div>
 
-    <select id="lang" onchange="switchLanguage()">
-          <option value="text/x-swift">Swift</option>
-          <option value="javascript">Javascript</option>
-    </select>
+    <div class="alert alert-dismissible fade show" role="alert" style="display: none">
+        <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong id="alert-header">Holy guacamole!</strong>
+        <p id="alert-body"></p>
+
+    </div>
+{#    <select id="lang" onchange="switchLanguage()">#}
+{#          <option value="text/x-swift">Swift</option>#}
+{#          <option value="javascript">Javascript</option>#}
+{#    </select>#}
+    <br />
+    <div class="input-group">
+        <span class="input-group-addon" id="question-title">Title</span>
+        <input type="text" class="form-control" placeholder="Your question title comes here...." aria-describedby="question-title">
+    </div>
+    <br />
+    <span class="input-group-addon" id="title">Code</span>
     <textarea id="code1" name="code1">function myFunction(p1, p2) {
     return p1 * p2;              // The function returns the product of p1 and p2
 }</textarea>

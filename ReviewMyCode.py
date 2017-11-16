@@ -4,7 +4,7 @@ import random
 import string
 
 import requests
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, jsonify
 
 import DB
 import config
@@ -133,9 +133,24 @@ def code(question_id):
         else:
             return render_template('codes.html', question=None)
 
-@app.route('/ask')
+@app.route('/ask', methods=['POST', 'GET'])
 def ask():
-    return render_template('ask_question.html')
+    if request.method == 'POST':
+        code = request.form['code']
+
+        question_asked = question.Question()
+        question_asked.language = 'javascript'
+        question_asked.question_code = code
+
+        # response = db.addQuestion(question_asked)
+        # return jsonify(
+        #     acknowledged=response.acknowledged,
+        # )
+        return jsonify(
+            acknowledged=True,
+        )
+    else:
+        return render_template('ask_question.html')
 
 @app.route('/logout')
 def logout():

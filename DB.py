@@ -23,8 +23,9 @@ class DB(object):
         return users
 
     def addQuestion(self, question):
-        json1 = json.dumps(question, default=lambda o: o.__dict__)
-        response = self.questions.insert_one(ast.literal_eval(json1))
+        json_string = json.dumps(question, default=lambda o: o.__dict__)
+        json_dict = ast.literal_eval(json_string)
+        response = self.questions.insert_one(json_dict)
         return response
 
     def getQuestions(self):
