@@ -1,4 +1,40 @@
 
+
+var getQueryString = function ( field, url ) {
+    var href = url ? url : window.location.href;
+    var reg = new RegExp( '[#?&]' + field + '=([^&#]*)', 'i' );
+    var string = reg.exec(href);
+    return string ? string[1] : null;
+};
+
+var createCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
 $("#stackLogin").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -18,11 +54,18 @@ $( document ).ready(function() {
     $(".bottom").tooltip({
         placement: "bottom"
     });
+    // console.log(window.location.href);
+
+    var stack_token = getQueryString('access_token');
+    var expires = getQueryString('expires');
+
+    createCookie('stack_token', stack_token, 7);
+    createCookie('stack_expires', expires, 7);
 });
 
 $(".summary").click(function() {
-              //alert('ashutosh mishra');
-              var win = window.open('/codes/' + this.id,"_self");
-              win.focus();
+  //alert('ashutosh mishra');
+  var win = window.open('/codes/' + this.id,"_self");
+  win.focus();
 
-         });
+ });
