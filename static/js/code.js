@@ -1,5 +1,7 @@
 
 submitted = false;
+stack_logged = false;
+
 $('.alert').hide();
 
 function getCookie(c_name) {
@@ -39,27 +41,41 @@ $("#stackLogin").click(function(e) {
 
 $("#submit-review").click(function(e) {
 
-    var code = $('#user-review')[0].value;
-    var question_id = $('#question-id')[0].value;
-    if (!submitted){
-        $.ajax({
-            type: "POST",
-            url: '/submit-review',
-            data: {
-                'review': code,
-                'question-id': question_id
-            },
-            success: success,
-        });
+    if(stack_logged){
+        var code = $('#user-review')[0].value;
+        var question_id = $('#question-id')[0].value;
+        if (!submitted){
+            $.ajax({
+                type: "POST",
+                url: '/submit-review',
+                data: {
+                    'review': code,
+                    'question-id': question_id
+                },
+                success: success,
+            });
+        }
+        else{
+            $('#alert-header').text('Ohhhh, Patience is key!!');
+            $$('.alert').removeClass('alert-success');
+            $('.alert').removeClass('alert-danger');
+            $('.alert').addClass('alert-warning');
+            $('#alert-body').text('Your review has already been posted.. ');
+            $('.alert').show();
+            $(".alert").alert();
+        }
     }
     else{
-        $('#alert-header').text('Ohhhh, Patience is key!!');
+        $('#alert-header').text('Need Stack Overflow login');
         $('.alert').removeClass('alert-success');
-        $('.alert').addClass('alert-warning');
-        $('#alert-body').text('Your review has already been posted.. ');
+        $('.alert').removeClass('alert-warning');
+        $('.alert').addClass('alert-danger');
+
+        $('#alert-body').text('We would need stackover flow login for reviewing this question.');
         $('.alert').show();
         $(".alert").alert();
     }
+
 });
 
 function success(data) {
@@ -69,6 +85,7 @@ function success(data) {
         $('#alert-body').text('Your review has been posted.. \n Thanks for your help.....');
         $('.alert').addClass('alert-success');
         $('.alert').removeClass('alert-warning');
+        $('.alert').removeClass('alert-danger');
         $('.alert').show();
         $(".alert").alert();
     }
@@ -82,7 +99,19 @@ function switchLanguage() {
 }
 
 $( document ).ready(function() {
-
+    var stack_token = getCookie('stack_token');
+    if (stack_token == null || stack_token == "null" || stack_token.length == 0){
+        $('#alert-header').text('Need Stack Overflow login');
+        $('.alert').removeClass('alert-success');
+        $('.alert').removeClass('alert-danger');
+        $('.alert').addClass('alert-warning');
+        $('#alert-body').text('We would need stackover flow login for reviewing this question.');
+        $('.alert').show();
+        $(".alert").alert();
+    }
+    else{
+        stack_logged = true
+    }
 });
 
 $('.alert .close').click(function(){
