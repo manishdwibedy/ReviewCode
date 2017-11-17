@@ -15,21 +15,7 @@ from model import user, question, review
 app = Flask(__name__)
 
 db = DB.DB()
-import pyrebase
 
-config_firebase = {
-  "apiKey": "AIzaSyAoskz4tPPIuZXRXkZxvzsQ59xbHssTHv0",
-  "authDomain": "review-code-38d2b.firebaseapp.com",
-  "databaseURL": "https://review-code-38d2b.firebaseio.com",
-  "storageBucket": "",
-  # "serviceAccount": "./secret.json"
-}
-
-
-firebase = pyrebase.initialize_app(config_firebase)
-
-# https://review-code-38d2b.firebaseio.com/code?auth=7E1hzaOHPNC8DenDj39n7GMsahQX7uiDG45oRimN
-# app.config.from_pyfile('config.cfg')
 app_id = ACCOUNTKIT_APP_ID
 app_secret = ACCOUNTKIT_APP_SECRET
 client_token = ACCOUNTKIT_CLIENT_TOKEN
