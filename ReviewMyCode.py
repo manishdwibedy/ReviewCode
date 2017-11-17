@@ -29,9 +29,6 @@ def test():
 
 @app.route('/stack_login')
 def getStackLogin():
-    # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=RrgzV*kWSo2MOMzBsW4raA))&key=OjpCuT)4u3QHIUrc2O)iQw((&
-
-    # https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&access_token=SqgClNdfdfVLsm8lIp3edw))&key=OjpCuT)4u3QHIUrc2O)iQw((&
     resp = make_response(redirect('/home'))
     return resp
 
@@ -170,7 +167,8 @@ def logout():
     resp.set_cookie('phone_number', expires=0)
     resp.set_cookie('email_address', expires=0)
     resp.set_cookie('user_access_token', expires=0)
-
+    resp.set_cookie('stack_token', expires=0)
+    resp.set_cookie('stack_expires', expires=0)
     return resp
 
 
