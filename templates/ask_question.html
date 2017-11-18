@@ -51,6 +51,14 @@
         textarea#code1{
             height: 300px;
         }
+
+        .alert{
+            margin: 10px;
+        }
+
+        div#ask-wrapper{
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -64,11 +72,6 @@
     {% endwith %}
 
     <!--/.Navbar-->
-    <div>
-        <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login?&scope=private_info">Add stackoverflow</a>
-
-    </div>
-
     <div class="alert alert-dismissible fade show" role="alert" style="display: none">
         <button type="button" class="close" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -82,17 +85,25 @@
 {#          <option value="javascript">Javascript</option>#}
 {#    </select>#}
     <br />
-    <div class="input-group">
-        <span class="input-group-addon" id="question-title">Title</span>
-        <input type="text" class="form-control" placeholder="Your question title comes here...." aria-describedby="question-title" id="question-title-input">
-    </div>
-    <br />
-    <span class="input-group-addon" id="title">Code</span>
-    <textarea id="code1" name="code1">function myFunction(p1, p2) {
-    return p1 * p2;              // The function returns the product of p1 and p2
-}</textarea>
 
-    <button type="button" class="btn btn-primary" id="submit-code">Submit Code for Review</button>
+    <div id="ask-wrapper">
+        <div class="input-group">
+            <span class="input-group-addon" id="question-title">Title</span>
+            <input type="text" class="form-control" placeholder="Your question title comes here...." aria-describedby="question-title" id="question-title-input">
+        </div>
+
+        <br />
+
+        <span class="input-group-addon" id="title">Code</span>
+
+        <textarea id="code1" name="code1">function myFunction(p1, p2) {
+        return p1 * p2;              // The function returns the product of p1 and p2
+    }</textarea>
+
+        <br />
+        <button type="button" class="btn btn-primary" id="submit-code">Submit Code for Review</button>
+
+    </div>
 
     <!-- /Start your project here-->
 
