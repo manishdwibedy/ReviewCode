@@ -11,10 +11,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav
+                    mr-auto">
+            <li class="nav-item {{ 'active' if page=='home' else '' }}">
+                <a class="nav-link" href="/">Home
+                    <span class="sr-only">(current)</span>
+                </a>
             </li>
+
+            <li class="nav-item {{ 'active' if page=='ask' else '' }}">
+                <a class="nav-link" href="/ask">Ask
+                    <span class="sr-only">(current)</span></a>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login?&scope=private_info">
+                    Add Stack Overflow
+                    <span class="sr-only">(current)</span></a>
+                </a>
+            </li>
+
+
         </ul>
         <!-- Links -->
 

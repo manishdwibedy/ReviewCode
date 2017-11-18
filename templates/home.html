@@ -78,7 +78,10 @@
     <!-- Start your project here-->
     <!--Navbar-->
 
-    {% include 'nav.html' %}
+    {% with %}
+        {% set page = 'home' %}
+        {% include 'nav.html' %}
+    {% endwith %}
 
     <!--/.Navbar-->
     <div>

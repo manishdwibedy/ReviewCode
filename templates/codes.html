@@ -56,7 +56,9 @@
     <!-- Start your project here-->
     <!--Navbar-->
 
-    {% include 'nav.html' %}
+    {% with page='code' %}
+        {% include 'nav.html' %}
+    {% endwith %}
 
     <!--/.Navbar-->
     <div>
