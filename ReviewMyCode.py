@@ -105,7 +105,14 @@ def home():
         redirect(request.path)
     else:
         questions = db.getQuestions()
-        return render_template('home.html', questions = questions)
+        return render_template('home.html', questions = questions, key='OjpCuT)4u3QHIUrc2O)iQw((')
+
+@app.route('/get_stack_info')
+def stackInfo():
+    stack_token = request.cookies.get('stack_token')
+    url = 'https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow&key=OjpCuT)4u3QHIUrc2O)iQw((&access_token=' + stack_token
+    r = requests.get(url)
+    response = r.json()
 
 @app.route('/codes/<question_id>')
 def code(question_id):
