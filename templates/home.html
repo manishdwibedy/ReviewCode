@@ -41,13 +41,7 @@
 
         .stats{
             padding-top: 8px;
-        }
-
-        .answers, .answered{
-            float: left;
-            width: 30px;
-            padding: 10px 30px;
-            line-height: 1;
+            padding-left: 30px;
         }
 
         .summary{
@@ -63,12 +57,12 @@
             padding-left: 0px;
         }
 
-        #actions{
-            margin: 20px 10px;
-        }
-
         a.bottom{
             background-color: #2BBBAD;
+        }
+
+        h1#page-header{
+            margin:20px;
         }
     </style>
 </head>
@@ -84,23 +78,7 @@
     {% endwith %}
 
     <!--/.Navbar-->
-    <div>
-
-
-        <div id="actions">
-            <a href="https://stackexchange.com/oauth/dialog?client_id=11120&redirect_uri=http://localhost:5000/stack_login?&scope=private_info"><button type="button" class="btn btn-primary">Add StackOverFlow</button></a>
-
-            <a href="/ask"><button type="button" class="btn btn-secondary">Ask a Question</button></a>
-        </div>
-
-
-
-{#        <select id="lang" onchange="switchLanguage()">#}
-{#          <option value="text/x-swift">Swift</option>#}
-{#          <option value="javascript">Javascript</option>#}
-{#        </select>#}
-    </div>
-
+    <h1 id="page-header">All Questions</h1>
     <div class="container">
         {% for question in questions %}
             <div class="row question">
@@ -110,13 +88,13 @@
                         <a class="bottom" title="" href="#" data-original-title="Accepted Reviews">10</a>
                     </span>
                 </div>
-                <div class="col col-lg-1 stats">
-                    <i class="fa fa-reply" aria-hidden="true" style="vertical-align: -webkit-baseline-middle;"></i>
-                    <span class="badge badge-default" style="vertical-align: -webkit-baseline-middle;">
-                        <a class="bottom" title="" href="#" data-original-title="Answered Reviews">100</a>
-                    </span>
-                </div>
-                <div class="col col-lg-10">
+{#                <div class="col col-lg-1 stats">#}
+{#                    <i class="fa fa-reply" aria-hidden="true" style="vertical-align: -webkit-baseline-middle;"></i>#}
+{#                    <span class="badge badge-default" style="vertical-align: -webkit-baseline-middle;">#}
+{#                        <a class="bottom" title="" href="#" data-original-title="Answered Reviews">100</a>#}
+{#                    </span>#}
+{#                </div>#}
+                <div class="col col-lg-11">
                     <div class="container">
                         <div class="row">
                             <div class="col col-lg-12 summary" id="{{ question._id }}">
